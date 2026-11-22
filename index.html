@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover practical AI tools, digital products, business templates and creative resources at Digitiva.">
+  <meta name="theme-color" content="#101126">
+  <title>Digitiva | Smart Digital Products</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header">
+  <a href="#" class="logo">Digi<span>tiva.</span></a>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#products">Products</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="cart-button" onclick="showCart()">
+    Cart (<span id="cart-count">0</span>)
+  </button>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="hero-content">
+    <span class="tag">YOUR DIGITAL WORLD STARTS HERE</span>
+    <h1>Smart Digital Products.<br><span>Smarter Living.</span></h1>
+    <p>Discover practical digital resources, AI guides, creative templates and tools designed to help you work smarter and grow.</p>
+    <a href="#products" class="primary-button">Explore Products →</a>
+  </div>
+</section>
+
+<section class="benefits">
+  <div>⚡ Instant digital resources</div>
+  <div>🌍 Worldwide access</div>
+  <div>💡 Practical solutions</div>
+</section>
+
+<section class="products-section" id="products">
+  <div class="section-heading">
+    <span class="tag">OUR COLLECTION</span>
+    <h2>Explore Our Products</h2>
+    <p>Useful resources for creators, entrepreneurs and learners.</p>
+  </div>
+  <div class="search-box">
+    <input id="search-input" type="search" placeholder="Search digital products..." oninput="renderProducts()">
+  </div>
+  <div class="categories">
+    <button onclick="filterProducts('All')">All</button>
+    <button onclick="filterProducts('AI')">AI & Technology</button>
+    <button onclick="filterProducts('Business')">Business</button>
+    <button onclick="filterProducts('Creative')">Creative</button>
+  </div>
+  <div class="product-grid" id="product-grid"></div>
+</section>
+
+<section class="about-section" id="about">
+  <span class="tag">ABOUT DIGITIVA</span>
+  <h2>Making Digital Life Smarter.</h2>
+  <p>Digitiva is an international digital-products brand focused on making useful resources accessible to everyone. Our mission is to help people learn, create and grow.</p>
+</section>
+
+<section class="contact-section" id="contact">
+  <span class="tag">GET IN TOUCH</span>
+  <h2>Need Help?</h2>
+  <p>Have questions about our products or services?</p>
+  <a href="mailto:YOUR-EMAIL@example.com" class="primary-button">Contact Us</a>
+</section>
+</main>
+
+<footer>
+  <a href="#" class="logo">Digi<span>tiva.</span></a>
+  <p>© 2026 Digitiva. All rights reserved.</p>
+  <p>Smart Digital Products. Smarter Living.</p>
+</footer>
+
+<div id="cart-modal" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeCart()">×</button>
+    <h2>Your Shopping Cart</h2>
+    <div id="cart-items"></div>
+    <p id="cart-total">Total: $0.00</p>
+    <p class="notice">Checkout will be available after payment integration.</p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
