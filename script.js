@@ -1,3 +1,6 @@
+
+const API_URL = "https://digitiva-payments.mosesdamulira85.workers.dev";
+
 const products = [
   {
     id: 1,
@@ -75,6 +78,14 @@ function updateCart() {
 
   document.getElementById("cart-total").textContent =
     "Total: $" + total.toFixed(2);
+
+  if (cart.length > 0) {
+    items.insertAdjacentHTML("beforeend", `
+      <button id="checkout-button" onclick="startCheckout()">
+        Checkout with JJuma — $${total.toFixed(2)}
+      </button>
+    `);
+  }
 }
 
 function removeFromCart(index) {
@@ -89,6 +100,60 @@ function showCart() {
 
 function closeCart() {
   document.getElementById("cart-modal").style.display = "none";
+}
+
+async function startCheckout() {
+  if (cart.length !== 1) {
+    alert("Please keep only one product in your cart for checkout.");
+    return;
+  }
+
+  const customerName = prompt("Enter your full name:");
+  if (!customerName || customerName.trim().length < 2) {
+    alert("Please enter your full name.");
+    return;
+  }
+
+  const customerEmail = prompt("Enter your email address:");
+  if (!customerEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail.trim())) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+
+  const button = document.getElementById("checkout-button");
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Connecting to JJuma...";
+  }
+
+  try {
+    const response = await fetch(`${API_URL}/api/checkout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        customer_name: customerName.trim(),
+        customer_email: customerEmail.trim()
+      })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.payment_url) {
+      throw new Error(result.error || "Checkout could not start.");
+    }
+
+    window.location.href = result.payment_url;
+
+  } catch (error) {
+    alert(error.message || "Connection failed. Please try again.");
+
+    if (button) {
+      button.disabled = false;
+      button.textContent = "Try Checkout Again";
+    }
+  }
 }
 
 renderProducts();
